@@ -68,6 +68,14 @@ app.get("/collectibles", (req, res) => {
 
 
 // Query Params for SHOES!?!?
+
+// For this specific case, I want to give the user the full list of shoes when then land on the root page
+// Did some digging through Stack Overflow, and saw that you can you can do the following:
+// res.write("content") -> Starts building the contents for the send.
+// A normal res.send() is a fixed operator, however, by using write, we can add multiple pieces of content.
+// Once we have all the information, we can use:
+// res.end, will tell the browser that we're done writing new stuff!
+
 const shoes = [
   { name: "Birkenstocks", price: 50, type: "sandal" },
   { name: "Air Jordans", price: 500, type: "sneaker" },
@@ -107,7 +115,6 @@ app.get("/shoes", (req, res) => {
       res.write(`<li>Type: ${type}</li>`);
     }
     res.write("</ul>");
-
 
 
     // Search Filtering
@@ -156,18 +163,7 @@ app.get("/shoes", (req, res) => {
 });
 
 
-
-// For this specific case, I want to give the user the full list of shoes when then land on the root page
-// Did some digging through Stack Overflow, and saw that you can you can do the following:
-// res.write("content") -> Starts building the contents for the send.
-// A normal res.send() is a fixed operator, however, by using write, we can add multiple pieces of content.
-// Once we have all the information, we can use:
-// res.end, will tell the browser that we're done writing new stuff!
-
-
-
-
-
+//
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 })
